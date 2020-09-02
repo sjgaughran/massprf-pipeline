@@ -1,0 +1,6 @@
+Click
+pyfaidx
+gffutils
+PyVCF
+biopython
+six
