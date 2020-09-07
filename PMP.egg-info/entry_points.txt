@@ -1,4 +1,0 @@
-
-        [console_scripts]
-        PMRF=PreMassPrf.scripts.PMRF:PMRF
-    

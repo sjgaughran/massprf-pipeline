@@ -1,3 +1,4 @@
+README.md
 setup.py
 PMRF.egg-info/PKG-INFO
 PMRF.egg-info/SOURCES.txt
