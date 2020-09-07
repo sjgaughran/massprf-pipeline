@@ -354,7 +354,7 @@ class MassPrf:
         For a given divergent and target consensus sequence, write the sequences to files 
 
         """
-        with open(f'{out_dir}/consensus_{gene_id}_{transcript_name}_pol.txt', 'w+') as f:
+        with open(f'{out_dir}/{gene_id}_{transcript_name}_pol_consensus.txt', 'w+') as f:
             f.write(f'>Polymorphism_consensus\n{data["target"]}\n')
 
 
@@ -363,7 +363,7 @@ class MassPrf:
         For a given divergent and target consensus sequence, write the sequences to files 
 
         """
-        with open(f'{out_dir}/consensus_{gene_id}_{transcript_name}_div.txt', 'w+') as f:
+        with open(f'{out_dir}/{gene_id}_{transcript_name}_div_consensus.txt', 'w+') as f:
             f.write(f'>Divergence_consensus\n{data["divergent"]}\n')
 
 
@@ -384,6 +384,10 @@ class MassPrf:
                         self.save_fasta(gene['Name'][0], sample, transcript_name, sample_dict[sample][transcript_name], out_dir)
 
     def full_fasta_specific(self, filename, out_dir):
+        """
+        Generate full fasta for specific genes, given a list of gene ID's
+        Currently not accessible from the CLI interface 
+        """
         genes = self.annot.get_all_genes()
 
         with open(filename, 'r') as f:
@@ -426,6 +430,11 @@ class MassPrf:
 
 
     def ancestral_specific(self, filename, out_dir):
+        """
+        Generate ancestral seqeunce for specific genes, given a list of gene ID's
+        Currently not accessible from the CLI interface 
+        
+        """
         with open(filename, 'r') as f:
             gene_names = f.readlines()
 
@@ -444,13 +453,13 @@ class MassPrf:
     def save_ancestral(self, gene_id, transcript_name, data, out_dir):
         anc = data['ancestor']
         con = data['consensus']
-        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc.fasta', 'w+') as f:
+        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc.txt', 'w+') as f:
             f.write(f'>Anc_from_{self.divergent}_and_{self.outgroup}\n{ anc }\n')
-        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc_con.fasta', 'w+') as f:
+        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc_con.txt', 'w+') as f:
             f.write(f'>Anc_from_{self.divergent}_and_{self.outgroup}_consensus\n{ con }\n')
 
 if __name__ == "__main__":
-    loc = "/home/accts/ewa2/PMF/PreMassPrf"
+    loc = "/home/ubuntu/environment/massprf-pipeline/PreMassPrf"
     gff_loc = f'{loc}/NW_018734359.1.gff'
     ref_loc = f'{loc}/NW_018734359.1.fasta'
     vcf_loc = f'{loc}/HMS_weddell_AFS_34359.vcf.gz'

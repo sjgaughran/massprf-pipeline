@@ -13,7 +13,8 @@ setup(
         'gffutils',
         'PyVCF',
         'biopython',
-        'six'
+        'six',
+        'pysam'
     ],
     entry_points='''
         [console_scripts]

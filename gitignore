@@ -1,1 +1,2 @@
-./PMRF.egg-info
+/PMRF.egg-info/*
+/PreMassPrf/__pycache__/*
