@@ -12,8 +12,14 @@ $ pip3 install --editable .
 $ PMRF --help
 ```
 
-## Example usage
+## Usage
+There are three commands, `seq`, `ancestor`, and `consensus`. 
+
 ```
-$ PMRF seq -v 'VARIANTS.vcf.gz' -f 'REFERENCE.fasta' -n 'ANNOTATION.gff' -d 'SISTER SAMPLE NAME' -o 'OUTPUT DIRECTORY NAME' -a 'OUTGROUP SAMPLE NAME'
+$ PMRF [command] -v 'VARIANTS.vcf.gz' -f 'REFERENCE.fasta' -n 'ANNOTATION.gff' -d 'SISTER SAMPLE NAME' -o 'OUTPUT DIRECTORY NAME' -a 'OUTGROUP SAMPLE NAME'
+```
+### Example
+```
+$ cd massprf-pipeline/testfiles
 $ PMRF seq -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_018734359.1.gff' -d 'WED1' -o 'output' -a 'AFS1'
 ```
