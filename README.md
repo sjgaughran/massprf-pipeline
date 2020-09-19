@@ -4,13 +4,13 @@
 - [Purpose](#purpose)
 - [Features](#features)
 - [mafs2vcf](#mafs2vcf)
+  * [Requirements](#requirements)
+  * [Installation](#installation)
+  * [Usage](#usage)
+- [PMRF](#pmrf)
   * [Requirements](#requirements-1)
   * [Installation](#installation-1)
   * [Usage](#usage-1)
-- [PMRF](#pmrf)
-  * [Requirements](#requirements-2)
-  * [Installation](#installation-2)
-  * [Usage](#usage-2)
 
 
 ## Purpose
