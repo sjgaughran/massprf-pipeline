@@ -42,7 +42,7 @@ chromo  position        major   minor   unknownEM       pu-EM   nInd
 1       14004623        T       C       0.259172        2.424727e-13    10
 ```
 
-Separate `.mafs` files must be generated for each species (target, sister, etc.). In `mafs2vcf`, the user specifies the role of each `.mafs` file (see [Usage](#usage)), and `mafs2vcf` generates a pseudo-VCF capturing the polymorphic (0/1) or divergent (0/0, 1/1) state of the target population (SAMP1, SAMP2), the sister species (DIV1), and the outgroup species (ANC1). This pseudo-VCF can then be used as input for `PMRF consensus` or `PMRF ancestor` (see [PMRF Usage](#usage-1)). 
+Separate `.mafs` files must be generated for each species (target, sister, etc.). In `mafs2vcf`, the user specifies the role of each `.mafs` file (see [Usage](#usage)), and `mafs2vcf` generates a pseudo-VCF capturing the polymorphic (`0/1`) or divergent (`0/0`, `1/1`) state of the target population (SAMP1, SAMP2), the sister species (DIV1), and the outgroup species (ANC1). This pseudo-VCF can then be used as input for `PMRF consensus` or `PMRF ancestor` (see [PMRF Usage](#usage-1)). 
 
 ### Requirements
 
