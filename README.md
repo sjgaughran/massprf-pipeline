@@ -7,11 +7,12 @@
   * [Requirements](#requirements)
   * [Installation](#installation)
   * [Usage](#usage)
+  * [Example](#example)
 - [PMRF](#pmrf)
   * [Requirements](#requirements-1)
   * [Installation](#installation-1)
   * [Usage](#usage-1)
-
+  * [Example](#example-1)
 
 ## Purpose
 
