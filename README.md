@@ -18,7 +18,7 @@
 
 Population genomic variant data are almost never stored as genomic sequence files, yet some software require input data to be in sequence format. One such software package, [MASS-PRF](https://github.com/Townsend-Lab-Yale/MASSPRF), is a powerful statistical tool that estimates the local strength of selection in protein-coding genes using the Poisson Random Field (PRF) framework (Zhao et al. 2017).
 
-`massprf-pipeline` provides tools that prepare input files for analysis in MASS-PRF, as well as scripts to efficiently process and plot the results from MASS-PRF. The pipeline was created with genome-wide analyses in mind, but it can also be used on smaller subsets of genes. 
+`massprf-pipeline` provides a suite of python-based tools that prepare input files for analysis in MASS-PRF, as well as scripts to efficiently process and plot the results from MASS-PRF. The pipeline was created with genome-wide analyses in mind, but it can also be used on smaller subsets of genes. 
 
 ## Features 
 
@@ -55,7 +55,15 @@ Separate `.mafs` files must be generated for each species (target, sister, etc.)
 
 ## PMRF
 
+`PMRF` is a command-line tool that transforms variant data from a VCF file into protein-coding sequences for each individual (`PMRF seq`) or consensus sequences of polymorphic and divergent sites (`PMRF consensus`, `PMRF ancestor`). Briefly, the program:
+1. creates a CDS annotation database from a .gff file using [gffutils](https://pythonhosted.org/gffutils/)
+2. iterates through every variant in the VCF file to identify variants that occur in annotated transcripts
+3. for each gene:
+    - if `seq` is used, outputs one fasta file containing a list of sequences for every individual in the target species and one fasta file containing the sequence for the sister (divergent) species
+    - if `consensus` is used, 
 
+
+When the consensus options are used, the output sequences
 
 
 ### Requirements
