@@ -13,6 +13,8 @@
   * [Installation](#installation-1)
   * [Usage](#usage-1)
   * [Example](#example-1)
+- [Running MASS-PRF](#runningmassprf)
+- [Processing Results](#processingresults)
 
 ## Purpose
 
@@ -92,3 +94,7 @@ $ PMRF [command] -v 'VARIANTS.vcf.gz' -f 'REFERENCE.fasta' -n 'ANNOTATION.gff' -
 $ cd massprf-pipeline/testfiles
 $ PMRF seq -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_018734359.1.gff' -d 'WED1' -o 'output' -a 'AFS1'
 ```
+
+## Running MASS-PRF
+
+## Processing Results
