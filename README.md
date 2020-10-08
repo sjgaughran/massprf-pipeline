@@ -98,3 +98,19 @@ $ PMRF seq -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_01
 ## Running MASS-PRF
 
 ## Processing Results
+
+We've also produced a simple python script to process and plot `MASS-PRF` output. When run from a directory containing `MASS-PRF` results files that end in *\_results.txt*, this script will:
+  - check for runs that failed and write the gene/transcript names as a list to *failed_genes.txt*;
+  - check for successful runs that show no significant signals of positive (&gamma; > 4; lower_CI > 0) or negative (&gamma; < 1; upper_CI < 0) selection and write the gene/transcript names as a list to *boring_genes.txt*;
+  - identify genes with significant results and for each gene:
+     - de-scale results from `MASS-PRF` to match real nucleotide positions
+     - write a list of any positions that show positive (&gamma; > 4; lower_CI > 0) selection to *\{gene_name\}_pos_sites.txt*
+     - write a list of any positions that show strong positive (&gamma; > 4; lower_CI > 4) selection to *\{gene_name\}_str_pos_sites.txt*
+     - write a list of any positions that show negative (&gamma; < 1; upper_CI < 0) selection to *\{gene_name\}_neg_sites.txt*
+     - write a .csv file containing the full, de-scaled results of `MASS-PRF`
+     - plot the results for the gene and write to a PDF
+  - write a list of gene names with signals of positive selection to *positive_genes.txt*
+  - write a list of gene names with signals of strong positive selection to *strongly_positive_genes.txt*
+  - write a list of gene names with signals of negative selection to *negative_genes.txt*
+
+All files written from this script will be stored in a sub-directory called */processed_output*. The plots are saved in */processed_output/plots*.
