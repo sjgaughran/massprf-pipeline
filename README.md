@@ -13,7 +13,7 @@
   * [Installation](#installation-1)
   * [Usage](#usage-1)
   * [Example](#example-1)
-- [Running MASS-PRF](#runningmassprf)
+- [Running MASS-PRF](#running-massprf)
 - [Processing Results](#processing-results)
 
 ## Purpose
@@ -58,15 +58,12 @@ Separate `.mafs` files must be generated for each species (target, sister, etc.)
 ## PMRF
 
 `PMRF` is a command-line tool that transforms variant data from a VCF file into protein-coding sequences for each individual (`PMRF seq`) or consensus sequences of polymorphic and divergent sites (`PMRF consensus`, `PMRF ancestor`). Briefly, the program:
-1. creates a CDS annotation database from a .gff file using [gffutils](https://pythonhosted.org/gffutils/)
+1. creates a CDS annotation database from a reference .fasta file and a .gff file using [gffutils](https://pythonhosted.org/gffutils/)
 2. iterates through every variant in the VCF file to identify variants that occur in annotated transcripts
 3. for each gene:
     - if `seq` is used, outputs one fasta file containing a list of sequences for every individual in the target species and one fasta file containing the sequence for the sister (divergent) species
-    - if `consensus` is used, 
-
-
-When the consensus options are used, the output sequences
-
+    - if `consensus` is used, outputs consensus sequences as used in MASS-PRF. The polymorphism consensus sequence (*\*\_pol.txt*) captures polymorphism data in the target species ('R': replacement/non-synonymous polymorphism; 'S': silent/synonymous polymorphism; '\*': invariant site). The divergence consensus sequence captures fixed differences between the target and divergent species ('R': replacement/non-synonymous divergent site; 'S': silent/synonymous divergent site; '\*': invariant site).
+    - if `ancestor` is used, output a polymorphism consensus sequence (*\*\_pol.txt*), an ancestral sequence reconstruction (*\*\_anc.fasta*), and a divergence consensus sequence of fixed differences between the target species and the reconstructed ancestral sequence (*\*\_anc_con.txt*). The ancestral sequence reconstruction is done through simple parsimony by specifying an outgroup ('ancestral') species to both the target and sister species. 
 
 ### Requirements
 - Python 3.6
@@ -97,9 +94,11 @@ $ PMRF seq -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_01
 
 ## Running MASS-PRF
 
+`MASS-PRF` can be be downloaded from the [Townsend Lab github](https://github.com/Townsend-Lab-Yale/MASSPRF) and should be cited as [Zhao *et al.* (2017)](https://academic.oup.com/mbe/article/34/11/3006/4055061). 
+
 ## Processing Results
 
-We've also produced a simple python script to process and plot `MASS-PRF` output. When run from a directory containing `MASS-PRF` results files that end in *\_results.txt*, this script will:
+We've also produced a simple python script to process and plot `MASS-PRF` output. When run from a directory containing `MASS-PRF` results files that end in *\_results.txt*, this script will look through all files in the results directory and:
   - check for runs that failed and write the gene/transcript names as a list to *failed_genes.txt*;
   - check for successful runs that show no significant signals of positive (&gamma; > 4; lower_CI > 0) or negative (&gamma; < 1; upper_CI < 0) selection and write the gene/transcript names as a list to *boring_genes.txt*;
   - identify genes with significant results and for each gene:
