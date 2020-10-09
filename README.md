@@ -79,13 +79,14 @@ $ PMRF --help
 
 ### Usage
 `PMRF` has three commands:
-* `seq`: creates
-* `consensus`:
-* `ancestor`:
+* `seq`
+* `consensus`
+* `ancestor`
 
 ```
 $ PMRF [command] -v 'VARIANTS.vcf.gz' -f 'REFERENCE.fasta' -n 'ANNOTATION.gff' -d 'SISTER SAMPLE NAME' -o 'OUTPUT DIRECTORY NAME' -a 'OUTGROUP SAMPLE NAME'
 ```
+
 ### Example
 ```
 $ cd massprf-pipeline/testfiles
