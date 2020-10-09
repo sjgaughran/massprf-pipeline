@@ -13,7 +13,7 @@
   * [Installation](#installation-1)
   * [Usage](#usage-1)
   * [Example](#example-1)
-- [Running MASS-PRF](#running-massprf)
+- [Running MASS-PRF](#running-mass-prf)
 - [Processing Results](#processing-results)
 
 ## Purpose
