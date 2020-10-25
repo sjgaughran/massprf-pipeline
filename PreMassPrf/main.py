@@ -455,7 +455,7 @@ class MassPrf:
         con = data['consensus']
         with open(f'{out_dir}/{gene_id}_{transcript_name}_anc.txt', 'w+') as f:
             f.write(f'>Anc_from_{self.divergent}_and_{self.outgroup}\n{ anc }\n')
-        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc_con.txt', 'w+') as f:
+        with open(f'{out_dir}/{gene_id}_{transcript_name}_anc_consensus.txt', 'w+') as f:
             f.write(f'>Anc_from_{self.divergent}_and_{self.outgroup}_consensus\n{ con }\n')
 
 if __name__ == "__main__":

@@ -43,7 +43,6 @@ class Annotation:
         gff_file:  gff file location
         ref_file: fasta file location
         ref: fasta file parser object
-        fn: gff file parse
         db: local sqlite3 file-based database made from the gff file
     """
     def __init__(self, gff_file, ref_file):
@@ -96,35 +95,6 @@ class Annotation:
         :return int
         """
         return self.db.count_features_of_type(kind)
-
-    def all_transcripts(self, gene):
-        """
-        Generates all the transcripts of a given gene feature. Assumes that CDS features have an mRNA parent and mRNA
-        features have a gene parent.
-        :param gene: ex. <Feature gene (2L:7529-9484[+]) at 0x...>
-        :return: a list of the transcript sequences
-        """
-        transcripts = []
-        mRNA_all = self.db.children(gene, featuretype='mRNA', order_by='start')
-
-        for mRNA in mRNA_all:
-            CDS_all = self.db.children(mRNA, featuretype='CDS', order_by='start')
-            total_CDS = ''
-
-            for CDS in CDS_all:
-                if CDS.strand == "+":
-                    exon = self.ref[gene.chrom][CDS.start - 1:CDS.end].seq  # start is not inclusive, end is
-                else:
-                    exon = self.ref[gene.chrom][CDS.start - 1:CDS.end].complement.seq
-
-                total_CDS += exon
-            if gene.strand == '-':
-                total_CDS = total_CDS[::-1]  # reverse the string
-
-            print("Current CDS: " + total_CDS)
-            transcripts.append(total_CDS)
-
-        return transcripts
 
     def transcript_dict(self, gene):
         """

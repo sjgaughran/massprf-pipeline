@@ -44,16 +44,12 @@ chromo  position        major   minor   unknownEM       pu-EM   nInd
 1       14004623        T       C       0.259172        2.424727e-13    10
 ```
 
-Separate `.mafs` files must be generated for each species (target, sister, etc.). In `mafs2vcf`, the user specifies the role of each `.mafs` file (see [Usage](#usage)), and `mafs2vcf` generates a pseudo-VCF capturing the polymorphic (`0/1`) or divergent (`0/0`, `1/1`) state of the target population (SAMP1, SAMP2), the sister species (DIV1), and the outgroup species (ANC1). This pseudo-VCF can then be used as input for `PMRF consensus` or `PMRF ancestor` (see [PMRF Usage](#usage-1)). 
-
-### Requirements
-
-
-### Installation
-
-
-### Usage
-
+Separate `.mafs` files must be generated for each species (target, sister, etc.). 
+In `mafs2vcf`, the user specifies the role of each `.mafs` file (see [Usage](#usage)), 
+and `mafs2vcf` generates a pseudo-VCF capturing the polymorphic (`0/1`) or divergent (`0/0`, `1/1`) 
+state of the target population (SAMP1, SAMP2), the sister species (DIV1), and the outgroup species (ANC1). 
+This pseudo-VCF can then be used as input for `PMRF consensus` or `PMRF ancestor` (see [PMRF Usage](#usage-1)). For 
+more information on usage and installation the github repository for [mafs2vcf](https://github.com/etowahs/mafs2vcf)
 
 ## PMRF
 
@@ -66,7 +62,7 @@ Separate `.mafs` files must be generated for each species (target, sister, etc.)
     - if `ancestor` is used, output a polymorphism consensus sequence (*\*\_pol.txt*), an ancestral sequence reconstruction (*\*\_anc.fasta*), and a divergence consensus sequence of fixed differences between the target species and the reconstructed ancestral sequence (*\*\_anc_con.txt*). The ancestral sequence reconstruction is done through simple parsimony by specifying an outgroup ('ancestral') species to both the target and sister species. 
 
 ### Requirements
-- Python 3.6
+- Python 3.6+
 - C compiler (for pysam)
 
 ### Installation
@@ -83,15 +79,51 @@ $ PMRF --help
 * `consensus`
 * `ancestor`
 
+Running a command follows the general format:
 ```
 $ PMRF [command] -v 'VARIANTS.vcf.gz' -f 'REFERENCE.fasta' -n 'ANNOTATION.gff' -d 'SISTER SAMPLE NAME' -o 'OUTPUT DIRECTORY NAME' -a 'OUTGROUP SAMPLE NAME'
 ```
 
-### Example
+#### Generate sequences
+To generate sequences for every gene transcript for every individual, use the `seq` command.
+
 ```
-$ cd massprf-pipeline/testfiles
+$ cd massprf-pipeline/tests/test-files    # navigate to relevant directory
+$ PMRF seq --help                         # for help on inputs
 $ PMRF seq -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_018734359.1.gff' -d 'WED1' -o 'output' -a 'AFS1'
 ```
+**Outputs**
+The designated ouput folder (set with `-o` flag) will contain .fasta files with the naming convention 
+- `[GENE ID]_[TRANSCRIPT ID]_pol.fasta`: sequences for every target species individuals
+- `[GENE ID]_[TRANSCRIPT ID]_div.fasta`: seqeunce of the divergent species (which was designated with `-d`).
+
+#### Generate consensus sequences
+To generate consensus sequences for every transcript, use the `consensus` command. Note that if the 
+anscestral sample is not designated with the `-a` flag, PMRF will assume that it is a target species individual. 
+```
+$ cd massprf-pipeline/tests/test-files    # navigate to relevant directory
+$ PMRF consensus --help                   # for help on inputs
+$ PMRF consensus -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_018734359.1.gff' -d 'WED1' -o 'output' -a 'AFS1'
+```
+**Outputs**
+The designated ouput folder (set with `-o` flag) will contain .txt files with the following convention. 
+- `[GENE ID]_[TRANSCRIPT ID]_consensus_pol.txt`: consensus sequences of target species individuals 
+- `[GENE ID]_[TRANSCRIPT ID]_consensus_div.txt`: consensus seqeunce of the divergent species (which was designated by the `-d` flag).
+
+#### Generate ancestral seqeunce
+To generate ancestral sequences for every gene transcript, use the `ancestor` command. The name of the ancestral species sample
+is set by the `-a` flag. The ancestor command typically takes a bit longer than the other two commands. 
+```
+$ cd massprf-pipeline/tests/test-files    # navigate to relevant directory
+$ PMRF ancestor --help                    # for help on inputs
+$ PMRF ancestor -v 'HMS_weddell_AFS_34359.vcf.gz' -f 'NW_018734359.1.fasta' -n 'NW_018734359.1.gff' -d 'WED1' -o 'output' -a 'AFS1'
+```
+**Outputs**
+The designated ouput folder (set with `-o` flag) will contain .txt files with the following naming convention 
+- `[GENE ID]_[TRANSCRIPT ID]_anc.txt`: anscestral sequence
+- `[GENE ID]_[TRANSCRIPT ID]_anc_consensus.txt`: ancestral consensus sequence
+- `[GENE ID]_[TRANSCRIPT ID]_pol_consensus.txt`: target species consensus sequence
+
 
 ## Running MASS-PRF
 
