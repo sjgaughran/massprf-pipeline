@@ -64,6 +64,7 @@ more information on usage and installation the github repository for [mafs2vcf](
 ### Requirements
 - Python 3.6+
 - C compiler (for pysam)
+- setuptools (< v 58.0.0)
 
 ### Installation
 ```
